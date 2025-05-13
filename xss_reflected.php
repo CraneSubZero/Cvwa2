@@ -1,12 +1,19 @@
 <?php
 session_start();
 define('CVWA2_WEB_PAGE_TO_ROOT', './');
+require_once CVWA2_WEB_PAGE_TO_ROOT . 'includes/cvwa2Page.php';
+
+$result_html = '';
+if (isset($_GET['Submit'])) {
+    $name = $_GET['name'];
+    $result_html = "<pre>Hello, $name!</pre>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CVWA2 - Home</title>
+    <title>CVWA2 - Reflected XSS</title>
     <link rel="stylesheet" href="assets/style.css">
     <script>
     function toggleDarkMode() {
@@ -37,26 +44,16 @@ define('CVWA2_WEB_PAGE_TO_ROOT', './');
     </div>
 </nav>
 <div class="container">
-    <h1>Welcome to College Vulnerability Web Application 2 (CVWA2)</h1>
+    <h2>Reflected XSS Demo</h2>
+    <form method="GET">
+        <label for="name">Enter your name:</label>
+        <input type="text" name="name" id="name" required>
+        <input type="submit" name="Submit" value="Submit">
+    </form>
+    <?php echo $result_html; ?>
     <div class="card">
-        <h2>Vulnerability Modules</h2>
-        <ul>
-            <li><a href="sql_injection.php">SQL Injection</a></li>
-            <li><a href="xss_reflected.php">Reflected XSS</a></li>
-            <li><a href="csrf_simulation.php">CSRF Simulation</a></li>
-            <li><a href="file_upload.php">File Upload</a></li>
-        </ul>
-    </div>
-    <div class="card">
-        <h2>Guides</h2>
-        <ul>
-            <li><a href="sql_guide.php">SQL Injection Guide</a></li>
-            <li><a href="xss_guide.php">XSS Guide</a></li>
-            <li><a href="csf_guide.php">CSRF Guide</a></li>
-            <li><a href="file_guide.php">File Upload Guide</a></li>
-            <li><a href="command_guide.php">Command Injection Guide</a></li>
-            <li><a href="crypto_guide.php">Crypto Guide</a></li>
-        </ul>
+        <strong>Try this for XSS:</strong>
+        <pre>&lt;script&gt;alert('XSS')&lt;/script&gt;</pre>
     </div>
 </div>
 </body>

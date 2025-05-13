@@ -1,12 +1,26 @@
 <?php
 session_start();
 define('CVWA2_WEB_PAGE_TO_ROOT', './');
+require_once CVWA2_WEB_PAGE_TO_ROOT . 'includes/cvwa2Page.php';
+
+$result_html = '';
+if (isset($_GET['Submit'])) {
+    $id = $_GET['id'];
+    cvwa2DatabaseConnect();
+    $query = "SELECT first_name, last_name FROM users WHERE user_id = '$id'";
+    $result = mysqli_query($GLOBALS["___mysqli_ston"], $query);
+    if ($row = mysqli_fetch_assoc($result)) {
+        $result_html = "<pre>ID: $id\nFirst name: {$row['first_name']}\nSurname: {$row['last_name']}</pre>";
+    } else {
+        $result_html = "<pre>No user found for ID: $id</pre>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CVWA2 - Home</title>
+    <title>CVWA2 - SQL Injection</title>
     <link rel="stylesheet" href="assets/style.css">
     <script>
     function toggleDarkMode() {
@@ -37,26 +51,16 @@ define('CVWA2_WEB_PAGE_TO_ROOT', './');
     </div>
 </nav>
 <div class="container">
-    <h1>Welcome to College Vulnerability Web Application 2 (CVWA2)</h1>
+    <h2>SQL Injection Demo</h2>
+    <form method="GET">
+        <label for="id">User ID:</label>
+        <input type="text" name="id" id="id" required>
+        <input type="submit" name="Submit" value="Submit">
+    </form>
+    <?php echo $result_html; ?>
     <div class="card">
-        <h2>Vulnerability Modules</h2>
-        <ul>
-            <li><a href="sql_injection.php">SQL Injection</a></li>
-            <li><a href="xss_reflected.php">Reflected XSS</a></li>
-            <li><a href="csrf_simulation.php">CSRF Simulation</a></li>
-            <li><a href="file_upload.php">File Upload</a></li>
-        </ul>
-    </div>
-    <div class="card">
-        <h2>Guides</h2>
-        <ul>
-            <li><a href="sql_guide.php">SQL Injection Guide</a></li>
-            <li><a href="xss_guide.php">XSS Guide</a></li>
-            <li><a href="csf_guide.php">CSRF Guide</a></li>
-            <li><a href="file_guide.php">File Upload Guide</a></li>
-            <li><a href="command_guide.php">Command Injection Guide</a></li>
-            <li><a href="crypto_guide.php">Crypto Guide</a></li>
-        </ul>
+        <strong>Try this for SQL Injection:</strong>
+        <pre>1' OR '1'='1</pre>
     </div>
 </div>
 </body>
