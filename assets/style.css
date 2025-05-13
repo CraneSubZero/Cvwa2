@@ -1,0 +1,139 @@
+/* CVWA2 Reddit-like UI - Light & Dark Mode */
+:root {
+  --background: #ffffff;
+  --foreground: #dae0e6;
+  --card: #ffffff;
+  --text: #1a1a1b;
+  --link: #0079d3;
+  --link-hover: #005999;
+  --border: #ccc;
+  --button-bg: #0079d3;
+  --button-text: #fff;
+  --button-hover: #005999;
+}
+
+body {
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background: var(--foreground);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav a {
+  color: var(--link);
+  text-decoration: none;
+  margin-right: 1.5rem;
+  font-weight: 500;
+}
+nav a:hover {
+  color: var(--link-hover);
+}
+
+.container {
+  max-width: 700px;
+  margin: 2rem auto;
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 2rem;
+  border: 1px solid var(--border);
+}
+
+.card {
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+h1, h2, h3 {
+  color: var(--text);
+  margin-top: 0;
+}
+
+form {
+  margin: 1.5rem 0;
+}
+
+input[type="text"], input[type="password"], select {
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  background: var(--foreground);
+  color: var(--text);
+}
+
+input[type="submit"], button {
+  background: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+input[type="submit"]:hover, button:hover {
+  background: var(--button-hover);
+}
+
+pre {
+  background: var(--foreground);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+}
+
+/* Light/Dark Mode Toggle */
+.toggle-mode {
+  background: none;
+  border: none;
+  color: var(--link);
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+/* Dark Mode */
+.dark-mode {
+  --background: #1a1a1b;
+  --foreground: #222226;
+  --card: #272729;
+  --text: #d7dadc;
+  --link: #d7dadc;
+  --link-hover: #ff4500;
+  --border: #343536;
+  --button-bg: #ff4500;
+  --button-text: #fff;
+  --button-hover: #d93a00;
+}
+
+.dark-mode nav, .dark-mode .container, .dark-mode .card, .dark-mode pre {
+  box-shadow: none;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--foreground);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+} 
